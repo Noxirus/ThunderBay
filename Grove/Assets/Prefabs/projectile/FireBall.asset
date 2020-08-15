@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 326c43e20fe73f94e8aa44fce53b2da3, type: 3}
+  m_Name: FireBall
+  m_EditorClassIdentifier: 
+  muzzleEffect: {fileID: 3345574665802815548, guid: 50811b9496e7c064db848a5be88352ce,
+    type: 3}
+  projectileObject: {fileID: 6540182071207744685, guid: 287a1f3d289fe3a4fbf2f190e2f17eb7,
+    type: 3}
+  hitEffect: {fileID: 8925750562109131696, guid: 95941c4e640a82c4f8a0cf29c4fb934f,
+    type: 3}
