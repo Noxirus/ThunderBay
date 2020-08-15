@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Tree
+  - Magic
+  - Projectiles
+  - Enemy
   layers:
   - Default
   - TransparentFX

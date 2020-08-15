@@ -36,4 +36,11 @@ public class EnemyController : MonoBehaviour
         }
         navigation.SetDestination(target.transform.position);
     }
+
+    public void TakeHit(int damage)
+    {
+        //Display death animation
+        //Deactivate
+        gameObject.SetActive(false);
+    }
 }
