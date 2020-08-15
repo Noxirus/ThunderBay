@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -16,6 +17,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform magicPoint = null;
     List<GameObject> magic = new List<GameObject>();
     [SerializeField] int numOfMagic = 5;
+    [SerializeField] int health = 3;
+    bool immune = false;
+    float immuneTimer = 2f;
 
     void Start()
     {
@@ -29,7 +33,7 @@ public class PlayerController : MonoBehaviour
         {
             ShootMagic();
         }
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             GrowTree();
         }
@@ -69,9 +73,9 @@ public class PlayerController : MonoBehaviour
 
     void GrowTree()
     {
-        if (nearbyTree && energy >= 10)
+        if (nearbyTree)
         {
-            energy -= 10;
+            energy += 20;
             nearbyTree.GetComponent<PlantController>().Regrow();
         }
         else
@@ -91,6 +95,24 @@ public class PlayerController : MonoBehaviour
             magic.Add(tempMagic);
             tempMagic.SetActive(false);
         }
+    }
+
+    public void TakeHit(int damage)
+    {
+        if (!immune)
+        {
+            health -= damage;
+            if (health <= 0)
+            {
+                Debug.Log("Character has died");
+            }
+            StartCoroutine(ImmuneTimer());
+        }
+    }
+    IEnumerator ImmuneTimer()
+    {
+        yield return new WaitForSeconds(immuneTimer);
+        immune = false;
     }
 
     private void OnTriggerEnter(Collider other)

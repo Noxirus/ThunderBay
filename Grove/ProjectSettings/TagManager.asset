@@ -8,6 +8,8 @@ TagManager:
   - Magic
   - Projectiles
   - Enemy
+  - EnemySpawn
+  - SpawnManager
   layers:
   - Default
   - TransparentFX

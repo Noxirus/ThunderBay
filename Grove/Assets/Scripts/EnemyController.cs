@@ -12,9 +12,7 @@ public class EnemyController : MonoBehaviour
 
     void Awake()
     {
-        navigation = GetComponent<NavMeshAgent>();
-        trees = GameObject.FindGameObjectsWithTag("Tree");
-        player = GameObject.FindGameObjectWithTag("Player");
+        Setup();
     }
 
     private void OnEnable()
@@ -42,5 +40,11 @@ public class EnemyController : MonoBehaviour
         //Display death animation
         //Deactivate
         gameObject.SetActive(false);
+    }
+    void Setup()
+    {
+        navigation = GetComponent<NavMeshAgent>();
+        trees = GameObject.FindGameObjectsWithTag("Tree");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 }
