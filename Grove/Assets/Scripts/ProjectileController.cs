@@ -12,6 +12,7 @@ public class ProjectileController : MonoBehaviour
     public float hitEffectDuration;
 
     private Rigidbody rig;
+    private float Damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +54,10 @@ public class ProjectileController : MonoBehaviour
                 matches++;
             }
         }
-        return matches == 0;
+        return matches > 0;
+    }
+
+    public void SetDamage(float dmg) {
+        Damage = dmg;
     }
 }
