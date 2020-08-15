@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 1621721679}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -200,6 +200,8 @@ MonoBehaviour:
   magicPrefab: {fileID: 4308095851367142263, guid: 11fa21077dd26e94697c70f696ae8775,
     type: 3}
   magicPoint: {fileID: 3058848836181558169}
+  numOfMagic: 5
+  health: 3
 --- !u!54 &1621721679
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -227,10 +229,10 @@ GameObject:
   - component: {fileID: 4926295638472353407}
   - component: {fileID: 4926295638472353394}
   - component: {fileID: 4926295638472353405}
-  - component: {fileID: 4926295638472353404}
+  - component: {fileID: 173490942722182520}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -296,7 +298,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &4926295638472353404
+--- !u!136 &173490942722182520
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -334,7 +336,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7741904714531506871}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1.335, z: 0.689}
+  m_LocalPosition: {x: 0, y: 1.335, z: 0.898}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4926295637058048820}

@@ -29,6 +29,7 @@ public class PlantController : MonoBehaviour
     }
     public void Burn()
     {
+        Debug.Log("Triggered burning");
         if (!burnt)
         {
             burnt = true;

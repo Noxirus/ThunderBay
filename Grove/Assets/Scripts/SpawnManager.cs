@@ -18,14 +18,12 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnEnemy()
     {
-        
         yield return new WaitForSeconds(enemySpawnTimer);
-        Debug.Log("Spawning Started");
         for (int i = 0; i < enemies.Count; i++)
         {
+            //TODO Potential edge case if there are all enemies on the field then this could continue forever
             if (!enemies[i].activeInHierarchy)
             {
-                Debug.Log("Found Enemy");
                 enemies[i].transform.position = RandomRespawn().transform.position;
                 enemies[i].SetActive(true);
                 break;

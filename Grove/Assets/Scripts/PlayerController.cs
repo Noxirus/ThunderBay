@@ -101,6 +101,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!immune)
         {
+            Debug.Log("Hit Taken");
             health -= damage;
             if (health <= 0)
             {
@@ -111,6 +112,7 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator ImmuneTimer()
     {
+        immune = true;
         yield return new WaitForSeconds(immuneTimer);
         immune = false;
     }
