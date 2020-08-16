@@ -9,16 +9,30 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]GameObject enemyPrefab = null;
     List<GameObject> enemies = new List<GameObject>();
     [SerializeField]int numberOfMaxEnemies = 10;
+    [SerializeField] int enemiesPerWave = 0;
 
     void Start()
     {
         SpawnSetup();
-        StartCoroutine(SpawnEnemy());
+        StartCoroutine(SpawnWave());
     }
 
-    IEnumerator SpawnEnemy()
+    IEnumerator SpawnWave()
     {
         yield return new WaitForSeconds(enemySpawnTimer);
+        Debug.Log("Wave spawned");
+        if(enemiesPerWave >= 0)
+        {
+            for (int i = 0; i < enemiesPerWave; i++)
+            {
+                SpawnSingleEnemy();
+            }
+        }
+        StartCoroutine(SpawnWave());
+    }
+
+    void SpawnSingleEnemy()
+    {
         for (int i = 0; i < enemies.Count; i++)
         {
             //TODO Potential edge case if there are all enemies on the field then this could continue forever
@@ -29,7 +43,6 @@ public class SpawnManager : MonoBehaviour
                 break;
             }
         }
-        StartCoroutine(SpawnEnemy());
     }
 
     Transform RandomRespawn()
@@ -49,6 +62,11 @@ public class SpawnManager : MonoBehaviour
         }
 
         enemySpawnAreas = GameObject.FindGameObjectsWithTag("EnemySpawn");
+    }
+
+    public void IncreaseEnemiesPerWave(int amount)
+    {
+        enemiesPerWave = amount;
     }
 
     public void TriggerBossRound(int roundNumber)

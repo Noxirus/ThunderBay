@@ -19,7 +19,7 @@ public class PlantController : MonoBehaviour
         burnedColor = material.color;
     }
     //TODO these will likely need to be coroutines so you have time to react to a tree growing/burning
-    public void Regrow()
+    public bool Regrow()
     {
         if (burnt)
         {
@@ -27,10 +27,11 @@ public class PlantController : MonoBehaviour
             burnt = false;
             material.color = growingColor;
             gameManager.UpdateGameState();
+            return true;
         }
         else
         {
-            return;
+            return false;
         }
     }
     public void Burn()
