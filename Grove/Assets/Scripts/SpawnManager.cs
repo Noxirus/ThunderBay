@@ -50,4 +50,9 @@ public class SpawnManager : MonoBehaviour
 
         enemySpawnAreas = GameObject.FindGameObjectsWithTag("EnemySpawn");
     }
+
+    public void TriggerBossRound(int roundNumber)
+    {
+
+    }
 }

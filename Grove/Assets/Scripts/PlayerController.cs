@@ -9,7 +9,10 @@ public class PlayerController : MonoBehaviour
     Camera cam;
 
     [Header("Growth")]
-    [SerializeField][Range(0f, 100f)]float energy = 50f;
+    [SerializeField][Range(0f, 100f)]float energy = 20f;
+    [SerializeField]int lifeGems = 0;
+    [SerializeField] float energyRecharge = 1f;
+    bool restoring = false;
     GameObject nearbyTree;
 
     [Header("Combat")]
@@ -29,6 +32,7 @@ public class PlayerController : MonoBehaviour
     {
         MovePlayer();
         LookAtMouse();
+        EnergyChange();
         if (Input.GetMouseButtonDown(0))
         {
             ShootMagic();
@@ -36,6 +40,30 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             GrowTree();
+        }
+    }
+
+    void EnergyChange()
+    {
+        if (restoring)
+        {
+            energy += energyRecharge * Time.deltaTime * 3;
+        }
+        else
+        {
+            energy -= energyRecharge * Time.deltaTime;
+        }
+    }
+
+    public void EnterOrLeaveGrowth(bool entering)
+    {
+        if (entering)
+        {
+            restoring = true;
+        }
+        else
+        {
+            restoring = false;
         }
     }
 
@@ -75,7 +103,6 @@ public class PlayerController : MonoBehaviour
     {
         if (nearbyTree)
         {
-            energy += 20;
             nearbyTree.GetComponent<PlantController>().Regrow();
         }
         else

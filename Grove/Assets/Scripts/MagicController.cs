@@ -30,7 +30,11 @@ public class MagicController : MonoBehaviour
         {
             other.gameObject.GetComponentInParent<PlayerController>().TakeHit(damage);
             gameObject.SetActive(false);
-        }  
+        }
+        else if (other.gameObject.CompareTag("Tree"))
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     IEnumerator KillTimer()
