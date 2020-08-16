@@ -88,8 +88,8 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6540182070975650082}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
+  m_IsTrigger: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 2005400988663918346}
   m_Layer: 0
   m_Name: FireBallProjectile
-  m_TagString: Untagged
+  m_TagString: Magic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,7 +121,7 @@ Transform:
   m_GameObject: {fileID: 6540182071207744685}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.03599465, y: 1.667834, z: 0.026}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 6540182071891637615}
   - {fileID: 6540182071805462852}
@@ -156,7 +156,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!114 &2005400988663918346
 MonoBehaviour:
@@ -177,6 +177,7 @@ MonoBehaviour:
   projectileDuration: 4
   muzzleEffectDuration: 2
   hitEffectDuration: 2
+  Damage: 1
 --- !u!1 &6540182071805462859
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,8 +266,8 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6540182071805462859}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
+  m_IsTrigger: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -317,7 +318,10 @@ VisualEffect:
   m_ResetSeedOnPlay: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 0.25
+        m_Name: Radius
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:

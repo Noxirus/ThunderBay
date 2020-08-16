@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour
     NavMeshAgent navigation;
     List<GameObject> trees = new List<GameObject>();
     GameObject player;
+    int currentHealth;
 
     [Header("Combat")]
     bool rangedEnemy = false;
@@ -19,7 +20,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] Transform firePoint = null;
     bool shotRecently = false;
     [SerializeField]float shootCooldown = 2f;
-
+    [SerializeField] int maxHealth;
+    [SerializeField] EnemyHealthBar healthBar;
     void Awake()
     {
         Setup();
@@ -86,10 +88,17 @@ public class EnemyController : MonoBehaviour
         {
             rangedEnemy = false;
         }
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(currentHealth);
     }
     public void TakeHit(int damage)
     {
-        gameObject.SetActive(false);
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            gameObject.SetActive(false);
+        }
+        healthBar.SetHealth(currentHealth);
     }
     void Shoot(GameObject target)
     {

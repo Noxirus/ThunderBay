@@ -4,60 +4,69 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
-    public Projectile projectile;
-    public List<string> hitTargetTag;//the list of target that should hit on
-    public float speed;
-    public float projectileDuration;
-    public float muzzleEffectDuration;
-    public float hitEffectDuration;
+    [SerializeField] Projectile projectile;
+    [SerializeField] List<string> hitTargetTag;//the list of target that should hit on
+    [SerializeField] float speed;
+    [SerializeField] float projectileDuration;
+    [SerializeField] float muzzleEffectDuration;
+    [SerializeField] float hitEffectDuration;
+    [SerializeField] int Damage;
 
     private Rigidbody rig;
-    private float Damage;
+    private string TagName;
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         GameObject muzzle = Instantiate(projectile.muzzleEffect, transform.position, Quaternion.Euler(transform.forward));
         Destroy(muzzle.gameObject, muzzleEffectDuration);
-        Destroy(gameObject, projectileDuration);
         rig = GetComponent<Rigidbody>();
+        StopAllCoroutines();
+        StartCoroutine(magicCounter(projectileDuration));
+        rig.velocity = transform.up * speed;
     }
 
     // Update is called once per frame
     void Update()
     {
-        rig.velocity = transform.forward * speed;
     }
 
     //
     private void OnTriggerEnter(Collider other)
     {
         //if it hits the correct object
-        if (isInTargetList(other.gameObject)) {
+        if (DoDamage(other.gameObject)) {
             rig.velocity = Vector3.zero;//stop the projectile
-            //disable all child object which are the effects
-            for (int i = 0; i < transform.childCount; i++) {
-                transform.GetChild(i).gameObject.SetActive(false);
-            }
             //do damage here
 
             GameObject hit = Instantiate(projectile.hitEffect, transform.position, Quaternion.Euler(transform.forward));
             Destroy(hit.gameObject, hitEffectDuration);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
     //helper method to check if the hit object is in the target list
-    private bool isInTargetList(GameObject obj) {
+    private bool DoDamage(GameObject obj) {
         int matches = 0;
-        for (int i = 0; i < hitTargetTag.Count; i++) {
-            if (obj.tag == hitTargetTag[i]) {
-                matches++;
-            }
+
+        if (obj.CompareTag("Enemy"))
+        {
+            obj.GetComponent<EnemyController>().TakeHit(Damage);
+            matches++;
+        }
+        else if (obj.CompareTag("Player"))
+        {
+            obj.GetComponentInParent<PlayerController>().TakeHit(Damage);
+            matches++;
+        }
+        else if (obj.CompareTag("Tree"))
+        {
+            matches++;
         }
         return matches > 0;
     }
 
-    public void SetDamage(float dmg) {
-        Damage = dmg;
+    IEnumerator magicCounter(float Duration) {
+        yield return new WaitForSeconds(Duration);
+        gameObject.SetActive(false);
     }
 }

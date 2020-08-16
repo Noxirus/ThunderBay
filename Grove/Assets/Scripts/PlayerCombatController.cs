@@ -21,7 +21,6 @@ public class PlayerCombatController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.E) && counter <= 0) {
             GameObject proj = Instantiate(projectile, shootPoint.position,Quaternion.Euler(shootPoint.forward));
-            proj.GetComponent<ProjectileController>().SetDamage(Damage);
             counter = 1 / frequency;
         }
         counter -= Time.deltaTime;
