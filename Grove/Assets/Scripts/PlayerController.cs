@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,8 +22,11 @@ public class PlayerController : MonoBehaviour
     List<GameObject> magic = new List<GameObject>();
     [SerializeField] int numOfMagic = 5;
     [SerializeField] int health = 3;
+    [SerializeField] Stat Damage;
     bool immune = false;
     float immuneTimer = 2f;
+
+    public Action<int> OnDamageChangeCallBack;//delegate for all changing all the magic object
 
     void Start()
     {
@@ -119,6 +123,7 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < numOfMagic; i++)
         {
             GameObject tempMagic = Instantiate(magicPrefab, projectileParent);
+            OnDamageChangeCallBack += tempMagic.GetComponent<ProjectileController>().SetDamage;
             magic.Add(tempMagic);
             tempMagic.SetActive(false);
         }
@@ -157,5 +162,10 @@ public class PlayerController : MonoBehaviour
         {
             nearbyTree = null;
         }
+    }
+
+    public void PowerUp(int additionDamage) {
+        Damage.addModifier(additionDamage);
+        OnDamageChangeCallBack(Damage.getValue());
     }
 }

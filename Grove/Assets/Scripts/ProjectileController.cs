@@ -10,7 +10,7 @@ public class ProjectileController : MonoBehaviour
     [SerializeField] float projectileDuration;
     [SerializeField] float muzzleEffectDuration;
     [SerializeField] float hitEffectDuration;
-    [SerializeField] int Damage;
+    int Damage;
 
     private Rigidbody rig;
     private string TagName;
@@ -68,5 +68,9 @@ public class ProjectileController : MonoBehaviour
     IEnumerator magicCounter(float Duration) {
         yield return new WaitForSeconds(Duration);
         gameObject.SetActive(false);
+    }
+
+    public void SetDamage(int dmg) {
+        Damage = dmg;
     }
 }
