@@ -33,9 +33,13 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
+        CheckDistanceToTarget();
+    }
+
+    void CheckDistanceToTarget()
+    {
         float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
-        //Need to check if its a tree, then check distance, and check to see if the tree is growing or burning
-        if(distanceToTarget <= 1.5f && treeTarget != null)
+        if (distanceToTarget <= 1.5f && treeTarget != null)
         {
             if (!treeTarget.burnt)
             {
@@ -46,8 +50,11 @@ public class EnemyController : MonoBehaviour
                 ChooseTarget();
             }
         }
+        else if (distanceToTarget <= 1.5f)
+        {
+            ChooseTarget();
+        }
     }
-
     void BurnTree(PlantController tree)
     {
         tree.Burn();
