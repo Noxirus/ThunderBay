@@ -202,7 +202,7 @@ MonoBehaviour:
   magicPrefab: {fileID: 6540182071207744685, guid: 287a1f3d289fe3a4fbf2f190e2f17eb7,
     type: 3}
   magicPoint: {fileID: 3058848836181558169}
-  numOfMagic: 5
+  numOfMagic: 10
   health: 3
   Damage:
     baseValues: 1
