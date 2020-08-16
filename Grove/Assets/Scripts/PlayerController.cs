@@ -35,9 +35,14 @@ public class PlayerController : MonoBehaviour
 
     public Action<int> OnDamageChangeCallBack;//delegate for all changing all the magic object
 
+    //ADDED TO THE SCRIPT BY BRENDAN
+    private Animator anim;
+
     void Start()
     {
         Setup();
+        //ADDED TO THE SCRIPT BY BRENDAN
+        anim = GetComponent<Animator>();
     }
     void Update()
     {
@@ -53,6 +58,15 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 GrowTree();
+            }
+            //ADDED TO THE SCRIPT BY BRENDAN
+            if (Input.GetKeyDown("w") || Input.GetKeyDown("a") || Input.GetKeyDown("s") || Input.GetKeyDown("d"))
+            {
+                anim.Play("Run", 0, 0f);
+            }
+            if (Input.GetKeyUp("w") && Input.GetKeyUp("a") && Input.GetKeyUp("s") && Input.GetKeyUp("d"))
+            {
+                anim.Play("Idle", 0, 0f);
             }
         }
     }
@@ -91,7 +105,6 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         float vertical = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
         transform.Translate(new Vector3(horizontal, 0f, vertical), Space.World);
-
     }
 
     void LookAtMouse()
@@ -113,6 +126,8 @@ public class PlayerController : MonoBehaviour
                 magic[i].transform.position = magicPoint.transform.position;
                 magic[i].transform.rotation = magicPoint.transform.rotation;
                 magic[i].SetActive(true);
+                //ADDED TO THE SCRIPT BY BRENDAN
+                anim.Play("Attack", 0, 0f);
                 return;
             }
         }
