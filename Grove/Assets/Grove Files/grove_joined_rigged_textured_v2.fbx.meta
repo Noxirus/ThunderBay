@@ -122,7 +122,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: RightFoot
+    - boneName: RightFoot_end
       humanName: RightFoot
       limit:
         min: {x: 0, y: 0, z: 0}
@@ -226,7 +226,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: LeftFoor
+    - boneName: LeftFoor_end
       humanName: LeftFoot
       limit:
         min: {x: 0, y: 0, z: 0}
@@ -238,7 +238,7 @@ ModelImporter:
     - name: grove_joined_rigged_textured_v2(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0, w: 1}
+      rotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
       scale: {x: 1, y: 1, z: 1}
     - name: Armature
       parentName: grove_joined_rigged_textured_v2(Clone)
@@ -258,12 +258,12 @@ ModelImporter:
     - name: LeftLegLower
       parentName: LeftLegUpper
       position: {x: -5.7737207e-24, y: 0.007999999, z: 8.1046276e-17}
-      rotation: {x: 0.17603855, y: -0.6793549, z: 0.17603853, w: 0.6902883}
+      rotation: {x: -0.005788773, y: -0.701769, z: -0.008619696, w: 0.7123289}
       scale: {x: 1, y: 0.99999994, z: 1}
     - name: LeftFoor
       parentName: LeftLegLower
       position: {x: -1.3440679e-10, y: 0.010295631, z: -4.0653503e-10}
-      rotation: {x: 0.0000000102550635, y: 0.8978233, z: -0.44035596, w: 0.00000014328229}
+      rotation: {x: -0.007570703, y: 0.9976895, z: 0.06749789, w: 0.0015677513}
       scale: {x: 1, y: 1, z: 0.99999994}
     - name: LeftFoor_end
       parentName: LeftFoor
@@ -278,12 +278,12 @@ ModelImporter:
     - name: RightLegLower
       parentName: RightLegUpper
       position: {x: 3.552713e-17, y: 0.007999999, z: 8.1046276e-17}
-      rotation: {x: 0.17603855, y: -0.6793549, z: 0.17603853, w: 0.6902883}
+      rotation: {x: -0.0057888622, y: -0.7017688, z: -0.008619726, w: 0.71232915}
       scale: {x: 1, y: 1, z: 1}
     - name: RightFoot
       parentName: RightLegLower
       position: {x: -5.562932e-10, y: 0.010295631, z: -3.1110545e-11}
-      rotation: {x: 0.000000010255062, y: 0.8978232, z: -0.44035608, w: 0.0000001432823}
+      rotation: {x: -0.007571128, y: 0.9976895, z: 0.06749747, w: 0.0015690029}
       scale: {x: 1, y: 1, z: 0.99999994}
     - name: RightFoot_end
       parentName: RightFoot
