@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
     public void UpdateGameState()
     {
         float treesRegrown = 0f;
-        Debug.Log(trees.Count);
         for(int i = 0; i < trees.Count; i++)
         {
             if (!trees[i].burnt)
@@ -36,6 +35,11 @@ public class GameManager : MonoBehaviour
     //TODO add a call to the spawn manager to trigger a boss wave at certain milestones
     void CheckToChangeEnemyState()
     {
+        if(growthPercentage == 0)
+        {
+            //Game over
+        }
+
         if(growthPercentage >= 7 && phase == 0)
         {
             //Enter phase 1

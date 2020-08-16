@@ -28,7 +28,6 @@ public class SpawnManager : MonoBehaviour
                 SpawnSingleEnemy();
             }
         }
-
         StartCoroutine(SpawnWave());
     }
 

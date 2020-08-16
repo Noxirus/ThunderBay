@@ -96,6 +96,7 @@ public class EnemyController : MonoBehaviour
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
+            player.GetComponent<PlayerController>().GainLifeGems(2);
             gameObject.SetActive(false);
         }
         healthBar.SetHealth(currentHealth);

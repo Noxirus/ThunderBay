@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] float moveSpeed = 10f;
+    [SerializeField] float moveSpeed = 5f;
     Camera cam;
 
     [Header("Growth")]
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject magicPrefab = null;
     [SerializeField] Transform magicPoint = null;
     List<GameObject> magic = new List<GameObject>();
-    [SerializeField] int numOfMagic = 5;
+    [SerializeField] int numOfMagic = 10;
     [SerializeField] int health = 3;
     bool immune = false;
     float immuneTimer = 2f;
@@ -52,6 +52,10 @@ public class PlayerController : MonoBehaviour
         else
         {
             energy -= energyRecharge * Time.deltaTime;
+            if(energy <= 0)
+            {
+                PlayerDeath();
+            }
         }
     }
 
@@ -103,8 +107,11 @@ public class PlayerController : MonoBehaviour
     {
         if (energy >= 10 && nearbyTree)
         {
-            energy -= 10f;
-            nearbyTree.GetComponent<PlantController>().Regrow();
+            if (nearbyTree.GetComponent<PlantController>().Regrow())
+            {
+                energy -= 10f;
+                GainLifeGems(5);
+            }
         }
         else
         {
@@ -125,6 +132,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void PlayerDeath()
+    {
+
+    }
+
     public void TakeHit(int damage)
     {
         if (!immune)
@@ -133,7 +145,7 @@ public class PlayerController : MonoBehaviour
             health -= damage;
             if (health <= 0)
             {
-                Debug.Log("Character has died");
+                PlayerDeath();
             }
             StartCoroutine(ImmuneTimer());
         }
@@ -143,6 +155,26 @@ public class PlayerController : MonoBehaviour
         immune = true;
         yield return new WaitForSeconds(immuneTimer);
         immune = false;
+    }
+
+    public void GainLifeGems(int amount)
+    {
+        lifeGems += amount;
+        //Level 1
+        if(lifeGems >= 30)
+        {
+            moveSpeed = 10f;
+        }
+        //Level 2
+        if(lifeGems >= 60)
+        {
+
+        }
+        //Level 3
+        if(lifeGems >= 90)
+        {
+
+        }
     }
 
     private void OnTriggerEnter(Collider other)
