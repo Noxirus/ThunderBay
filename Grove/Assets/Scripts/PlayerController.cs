@@ -101,8 +101,9 @@ public class PlayerController : MonoBehaviour
 
     void GrowTree()
     {
-        if (nearbyTree)
+        if (energy >= 10 && nearbyTree)
         {
+            energy -= 10f;
             nearbyTree.GetComponent<PlantController>().Regrow();
         }
         else

@@ -156,8 +156,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_LookAt: {fileID: 1316348894}
+  m_Follow: {fileID: 1316348894}
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 10
@@ -908,6 +908,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1316348894 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4926295637058048820, guid: 6542afcded7ee724aad43214cb6f6c6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 244484576}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1408447766 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9113511974662546774, guid: 99c956bbac769774cb53fdc146fa33aa,
