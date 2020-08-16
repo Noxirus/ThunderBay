@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class FirebunnyAnimateController : CharacterAnimationController
 {
     private NavMeshAgent agent;
-    private bool Die = false;
     // Start is called before the first frame update
     void Awake()
     {
@@ -31,7 +30,6 @@ public class FirebunnyAnimateController : CharacterAnimationController
 
     public override void animateDie()
     {
-        Die = !Die;
         animateController.SetTrigger("DieTrigger");
     }
 }

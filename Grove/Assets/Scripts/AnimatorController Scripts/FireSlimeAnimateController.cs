@@ -7,6 +7,11 @@ public class FireSlimeAnimateController : CharacterAnimationController
 {
     private NavMeshAgent agent;
 
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+    }
+
     public override void animateAttack()
     {
         animateController.SetTrigger("AttackTrigger");
