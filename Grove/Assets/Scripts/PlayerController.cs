@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    UserInterface userInterface;
+
     [Header("Movement")]
     [SerializeField] float moveSpeed = 5f;
     Camera cam;
@@ -61,6 +63,7 @@ public class PlayerController : MonoBehaviour
                 PlayerDeath();
             }
         }
+        userInterface.UpdateEnergy(energy);
     }
 
     public void EnterOrLeaveGrowth(bool entering)
@@ -113,8 +116,15 @@ public class PlayerController : MonoBehaviour
         {
             if (nearbyTree.GetComponent<PlantController>().Regrow())
             {
+                if(health < 3)
+                {
+                    health += 1;
+                    userInterface.UpdateHealth(health);
+                } 
                 energy -= 10f;
+                userInterface.UpdateEnergy(energy);
                 GainLifeGems(5);
+                
             }
         }
         else
@@ -125,6 +135,9 @@ public class PlayerController : MonoBehaviour
 
     void Setup()
     {
+        userInterface = GameObject.FindGameObjectWithTag("UserInterface").GetComponent<UserInterface>();
+        userInterface.UpdateEnergy(energy);
+        userInterface.UpdateGems(lifeGems);
         cam = Camera.main;
         Transform projectileParent = GameObject.FindGameObjectWithTag("Projectiles").transform;
 
@@ -149,6 +162,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Hit Taken");
             health -= damage;
+            userInterface.UpdateHealth(health);
             if (health <= 0)
             {
                 PlayerDeath();
@@ -166,8 +180,9 @@ public class PlayerController : MonoBehaviour
     public void GainLifeGems(int amount)
     {
         lifeGems += amount;
+        userInterface.UpdateGems(lifeGems);
         //Level 1
-        if(lifeGems >= 30)
+        if (lifeGems >= 30)
         {
             moveSpeed = 10f;
         }
