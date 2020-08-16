@@ -325,17 +325,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4926295637058048821, guid: 6542afcded7ee724aad43214cb6f6c6e,
-        type: 3}
-      propertyPath: magicPrefab
-      value: 
-      objectReference: {fileID: 6540182071207744685, guid: 287a1f3d289fe3a4fbf2f190e2f17eb7,
-        type: 3}
-    - target: {fileID: 4926295637058048821, guid: 6542afcded7ee724aad43214cb6f6c6e,
-        type: 3}
-      propertyPath: Damage.baseValues
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4926295637058048823, guid: 6542afcded7ee724aad43214cb6f6c6e,
         type: 3}
       propertyPath: m_Name
@@ -911,7 +900,7 @@ Transform:
   - {fileID: 723453964}
   - {fileID: 2000430249}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1408447766 stripped
 Transform:
@@ -1835,7 +1824,7 @@ PrefabInstance:
     - target: {fileID: 8692109778096257360, guid: 612c1f09ecb72b04aadee1d15c9a1225,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8692109778096257360, guid: 612c1f09ecb72b04aadee1d15c9a1225,
         type: 3}

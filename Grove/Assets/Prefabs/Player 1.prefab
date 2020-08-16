@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 4926295637058048821}
   - component: {fileID: 1621721679}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player 1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -197,11 +197,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   energy: 50
-  magicPrefab: {fileID: 4308095851367142263, guid: 11fa21077dd26e94697c70f696ae8775,
+  lifeGems: 0
+  energyRecharge: 1
+  magicPrefab: {fileID: 6540182071207744685, guid: 287a1f3d289fe3a4fbf2f190e2f17eb7,
     type: 3}
   magicPoint: {fileID: 3058848836181558169}
   numOfMagic: 5
   health: 3
+  Damage:
+    baseValues: 1
 --- !u!54 &1621721679
 Rigidbody:
   m_ObjectHideFlags: 0
