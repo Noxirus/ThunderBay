@@ -82,9 +82,6 @@ public class UserInterface : MonoBehaviour
         }
     }
 
-    public void SetMaxEnergy(float maxEnergy) {
-        energySlider.maxValue = maxEnergy;
-        energySlider.value = maxEnergy;
     public void ExtraLife()
     {
         extraHeart.SetActive(true);
@@ -93,7 +90,8 @@ public class UserInterface : MonoBehaviour
 
     public void UpdateEnergy(float energy)
     {
-        energySlider.value = energy;
+        float newEnergy = energy / 100f;
+        energySlider.value = newEnergy;
     }
 
     public void UpdateGems(int gems)
