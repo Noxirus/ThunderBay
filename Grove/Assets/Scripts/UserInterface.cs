@@ -88,10 +88,15 @@ public class UserInterface : MonoBehaviour
         extraLife = true;
     }
 
+    public void SetMaxEnergy(float maxEnergy)
+    {
+        energySlider.maxValue = maxEnergy;
+        energySlider.value = maxEnergy;
+    }
+
     public void UpdateEnergy(float energy)
     {
-        float newEnergy = energy / 100f;
-        energySlider.value = newEnergy;
+        energySlider.value = energy;
     }
 
     public void UpdateGems(int gems)
