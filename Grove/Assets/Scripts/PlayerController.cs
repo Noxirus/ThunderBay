@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     [SerializeField] float moveSpeed = 5f;
     Camera cam;
+    Rigidbody rb;
 
     [Header("Growth")]
     [SerializeField][Range(0f, 100f)]float energy = 20f;
@@ -27,6 +30,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Stat Damage;
     bool immune = false;
     float immuneTimer = 2f;
+    bool playerAlive = true;
+    int deathTimer = 3;
 
     public Action<int> OnDamageChangeCallBack;//delegate for all changing all the magic object
 
@@ -36,16 +41,19 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        MovePlayer();
-        LookAtMouse();
-        EnergyChange();
-        if (Input.GetMouseButtonDown(0))
+        if (playerAlive)
         {
-            ShootMagic();
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            GrowTree();
+            MovePlayer();
+            LookAtMouse();
+            EnergyChange();
+            if (Input.GetMouseButtonDown(0))
+            {
+                ShootMagic();
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                GrowTree();
+            }
         }
     }
 
@@ -135,6 +143,7 @@ public class PlayerController : MonoBehaviour
 
     void Setup()
     {
+        rb = GetComponent<Rigidbody>();
         userInterface = GameObject.FindGameObjectWithTag("UserInterface").GetComponent<UserInterface>();
         userInterface.UpdateEnergy(energy);
         userInterface.UpdateGems(lifeGems);
@@ -153,7 +162,16 @@ public class PlayerController : MonoBehaviour
 
     void PlayerDeath()
     {
+        userInterface.MiddleTextMessage("Game Over");
+        playerAlive = false;
+        rb.constraints = RigidbodyConstraints.None;
+        StartCoroutine(DeathTimer());
+    }
 
+    IEnumerator DeathTimer()
+    {
+        yield return new WaitForSeconds(deathTimer);
+        SceneManager.LoadScene(0);
     }
 
     public void TakeHit(int damage)
@@ -184,17 +202,17 @@ public class PlayerController : MonoBehaviour
         //Level 1
         if (lifeGems >= 30)
         {
-            moveSpeed = 10f;
+            moveSpeed = 7f;
         }
         //Level 2
         if(lifeGems >= 60)
         {
-
+            moveSpeed = 8f;
         }
         //Level 3
         if(lifeGems >= 90)
         {
-
+            moveSpeed = 10f;
         }
     }
 

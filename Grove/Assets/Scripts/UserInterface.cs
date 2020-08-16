@@ -7,11 +7,19 @@ using UnityEngine.UI;
 public class UserInterface : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI gemText = null;
+    [SerializeField] TextMeshProUGUI middleText = null;
     [SerializeField] GameObject[] currentHearts = null;
     [SerializeField] Slider energySlider = null;
-    void Start()
+
+    public void MiddleTextMessage(string message)
     {
-        
+        middleText.text = message;
+        middleText.gameObject.SetActive(true);
+    }
+
+    public void HideMiddleText()
+    {
+        middleText.gameObject.SetActive(false);
     }
 
     public void UpdateHealth(int hearts)
