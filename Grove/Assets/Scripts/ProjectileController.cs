@@ -14,15 +14,23 @@ public class ProjectileController : MonoBehaviour
 
     private Rigidbody rig;
     private string TagName;
+    private bool isEnabled = false;
     // Start is called before the first frame update
     void OnEnable()
     {
-        GameObject muzzle = Instantiate(projectile.muzzleEffect, transform.position, Quaternion.Euler(transform.forward));
-        Destroy(muzzle.gameObject, muzzleEffectDuration);
         rig = GetComponent<Rigidbody>();
-        StopAllCoroutines();
-        StartCoroutine(magicCounter(projectileDuration));
         rig.velocity = transform.up * speed;
+        if (isEnabled)
+        {
+            GameObject muzzle = Instantiate(projectile.muzzleEffect, transform.position, Quaternion.Euler(transform.forward));
+            Destroy(muzzle.gameObject, muzzleEffectDuration);
+            StopAllCoroutines();
+            StartCoroutine(magicCounter(projectileDuration));
+        }
+        else
+        {
+            isEnabled = true;
+        }
     }
 
     // Update is called once per frame

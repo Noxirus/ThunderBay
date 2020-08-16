@@ -331,6 +331,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6540182071207744685, guid: 287a1f3d289fe3a4fbf2f190e2f17eb7,
         type: 3}
+    - target: {fileID: 4926295637058048821, guid: 6542afcded7ee724aad43214cb6f6c6e,
+        type: 3}
+      propertyPath: Damage.baseValues
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4926295637058048823, guid: 6542afcded7ee724aad43214cb6f6c6e,
         type: 3}
       propertyPath: m_Name
