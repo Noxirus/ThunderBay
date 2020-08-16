@@ -11,6 +11,8 @@ public class EnemyController : MonoBehaviour
     List<GameObject> trees = new List<GameObject>();
     GameObject player;
     int currentHealth;
+    CharacterAnimationController animateController;
+    float originalSpeed;
 
     [Header("Combat")]
     bool rangedEnemy = false;
@@ -22,6 +24,11 @@ public class EnemyController : MonoBehaviour
     [SerializeField]float shootCooldown = 2f;
     [SerializeField] int maxHealth;
     [SerializeField] EnemyHealthBar healthBar;
+    [SerializeField] float HitParalyzeTime;
+
+    [Header("Animation Counter")]
+    [SerializeField] float OnDieDelay;
+
     void Awake()
     {
         Setup();
@@ -36,6 +43,7 @@ public class EnemyController : MonoBehaviour
     private void Update()
     {
         CheckDistanceToTarget();
+        animateController.animateMove();
     }
 
     void CheckDistanceToTarget()
@@ -91,13 +99,19 @@ public class EnemyController : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(currentHealth);
     }
+
     public void TakeHit(int damage)
     {
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
             player.GetComponent<PlayerController>().GainLifeGems(2);
-            gameObject.SetActive(false);
+            StartCoroutine(OnDie());
+        }
+        else
+        {
+            StopAllCoroutines();
+            StartCoroutine(OnParalyze());
         }
         healthBar.SetHealth(currentHealth);
     }
@@ -106,6 +120,7 @@ public class EnemyController : MonoBehaviour
         if (!shotRecently)
         {
             transform.LookAt(target.transform.position);
+            animateController.animateAttack();
             for (int i = 0; i < fireProjectiles.Count; i++)
             {
                 if (!fireProjectiles[i].activeInHierarchy)
@@ -150,6 +165,8 @@ public class EnemyController : MonoBehaviour
     void Setup()
     {
         navigation = GetComponent<NavMeshAgent>();
+        animateController = GetComponent<CharacterAnimationController>();
+        originalSpeed = navigation.speed;
         GameObject[] tempTrees = GameObject.FindGameObjectsWithTag("Tree");
         for (int i = 0; i < tempTrees.Length; i++)
         {
@@ -164,5 +181,29 @@ public class EnemyController : MonoBehaviour
             fireProjectiles.Add(tempFireProjectile);
             tempFireProjectile.SetActive(false);  
         }
+    }
+    
+    IEnumerator OnDie()
+    {
+        animateController.animateDie();
+        navigation.speed = 0;
+        yield return new WaitForSeconds(OnDieDelay);//wait until the animation is done
+        navigation.speed = originalSpeed;
+        gameObject.SetActive(false);//disable the gameObject
+    }
+
+    IEnumerator OnParalyze()
+    {
+        float counter = HitParalyzeTime;
+        navigation.speed = 0;
+        animateController.animateDamage();//call the damage animation
+        while (counter >= 0)
+        {
+            
+            counter -= Time.deltaTime;
+            yield return null;
+        }
+
+        navigation.speed = originalSpeed;
     }
 }
