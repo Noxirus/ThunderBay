@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 326c43e20fe73f94e8aa44fce53b2da3, type: 3}
+  m_Name: Enemy Projectile
+  m_EditorClassIdentifier: 
+  muzzleEffect: {fileID: 8554678330798287756, guid: 6d3ca4b750eef1445963544ba41e1258,
+    type: 3}
+  projectileObject: {fileID: 5389844943490080516, guid: 357a00d33d95eb748ba2070a5024e60a,
+    type: 3}
+  hitEffect: {fileID: 8462533468016445781, guid: c2c6bfe828ae80a4ab733ff910ecdb8d,
+    type: 3}

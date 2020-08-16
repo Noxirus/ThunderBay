@@ -199,11 +199,13 @@ MonoBehaviour:
   energy: 50
   lifeGems: 0
   energyRecharge: 1
-  magicPrefab: {fileID: 4308095851367142263, guid: 11fa21077dd26e94697c70f696ae8775,
+  magicPrefab: {fileID: 6540182071207744685, guid: 287a1f3d289fe3a4fbf2f190e2f17eb7,
     type: 3}
   magicPoint: {fileID: 3058848836181558169}
   numOfMagic: 5
   health: 3
+  Damage:
+    baseValues: 1
 --- !u!54 &1621721679
 Rigidbody:
   m_ObjectHideFlags: 0

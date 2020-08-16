@@ -135,6 +135,7 @@ public class PlayerController : MonoBehaviour
             magic.Add(tempMagic);
             tempMagic.SetActive(false);
         }
+        OnDamageChangeCallBack(Damage.getValue());//initialize the damage for the fire ball
     }
 
     void PlayerDeath()
