@@ -179,6 +179,7 @@ public class PlayerController : MonoBehaviour
             tempMagic.SetActive(false);
         }
         OnDamageChangeCallBack(Damage.getValue());//initialize the damage for the fire ball
+        userInterface.SetMaxEnergy(energy);
     }
 
     void PlayerDeath()
@@ -262,6 +263,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //call when the player receive damage power up
     public void PowerUp(int additionDamage) {
         Damage.addModifier(additionDamage);
         OnDamageChangeCallBack(Damage.getValue());
