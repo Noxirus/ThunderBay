@@ -8,9 +8,11 @@ public class GameManager : MonoBehaviour
     float growthPercentage = 0f;
     int phase = 0;
     SpawnManager spawnManager;
+    MusicController musicController;
 
     void Start()
     {
+        musicController = FindObjectOfType<MusicController>();
         spawnManager = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManager>();
         GameObject[] tempTrees = GameObject.FindGameObjectsWithTag("Tree");
         for(int i = 0; i < tempTrees.Length; i++)
@@ -44,28 +46,33 @@ public class GameManager : MonoBehaviour
         {
             //Enter phase 1
             phase = 1;
+            musicController.progressCount = phase + 1;
             spawnManager.IncreaseEnemiesPerWave(1);
         }
         else if(growthPercentage >= 25 && phase == 1)
         {
             //Enter phase 2
-            phase = 2;     
+            phase = 2;
+            musicController.progressCount = phase + 1;
         }
         else if(growthPercentage >= 50 && phase == 2)
         {
             //Enter phase 3
             phase = 3;
+            musicController.progressCount = phase + 1;
             spawnManager.IncreaseEnemiesPerWave(2);
         }
         else if(growthPercentage >= 75 && phase == 3)
         {
             //Enter phase 4
             phase = 4;
+            musicController.progressCount = phase + 1;
         }
         else if(growthPercentage == 100 && phase == 4)
         {
             //Final boss phase
             phase = 5;
+            musicController.progressCount = phase + 1;
         }
     }
 }
