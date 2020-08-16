@@ -21,11 +21,13 @@ public class MusicController : MonoBehaviour
     }
     void Update()
     {
+        /*
         if (Input.GetKeyDown("space"))
         {
             progressCount++;
             currentTime = 0;
         }
+        */
         if (progressCount == 2)
         {
             currentTime += Time.deltaTime;
