@@ -25,8 +25,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject magicPrefab = null;
     [SerializeField] Transform magicPoint = null;
     List<GameObject> magic = new List<GameObject>();
+    int level = 0;
     [SerializeField] int numOfMagic = 10;
-    [SerializeField] int health = 3;
+    [SerializeField] int maxHealth = 3;
+    int currentHealth = 3;
     [SerializeField] Stat Damage;
     bool immune = false;
     float immuneTimer = 2f;
@@ -35,9 +37,14 @@ public class PlayerController : MonoBehaviour
 
     public Action<int> OnDamageChangeCallBack;//delegate for all changing all the magic object
 
+    //ADDED TO THE SCRIPT BY BRENDAN
+    private Animator anim;
+
     void Start()
     {
         Setup();
+        //ADDED TO THE SCRIPT BY BRENDAN
+        anim = GetComponent<Animator>();
     }
     void Update()
     {
@@ -54,6 +61,15 @@ public class PlayerController : MonoBehaviour
             {
                 GrowTree();
             }
+            //ADDED TO THE SCRIPT BY BRENDAN
+            if (Input.GetKeyDown("w") || Input.GetKeyDown("a") || Input.GetKeyDown("s") || Input.GetKeyDown("d"))
+            {
+                anim.Play("Run", 0, 0f);
+            }
+            if (Input.GetKeyUp("w") && Input.GetKeyUp("a") && Input.GetKeyUp("s") && Input.GetKeyUp("d"))
+            {
+                anim.Play("Idle", 0, 0f);
+            }
         }
     }
 
@@ -66,7 +82,11 @@ public class PlayerController : MonoBehaviour
         else
         {
             energy -= energyRecharge * Time.deltaTime;
-            if(energy <= 0)
+            if(energy < 15)
+            {
+                userInterface.MiddleTextMessage("Low Energy! Get near a tree to recharge", Color.yellow);
+            }
+            else if(energy <= 0)
             {
                 PlayerDeath();
             }
@@ -91,7 +111,6 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         float vertical = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
         transform.Translate(new Vector3(horizontal, 0f, vertical), Space.World);
-
     }
 
     void LookAtMouse()
@@ -113,6 +132,8 @@ public class PlayerController : MonoBehaviour
                 magic[i].transform.position = magicPoint.transform.position;
                 magic[i].transform.rotation = magicPoint.transform.rotation;
                 magic[i].SetActive(true);
+                //ADDED TO THE SCRIPT BY BRENDAN
+                anim.Play("Attack", 0, 0f);
                 return;
             }
         }
@@ -124,10 +145,10 @@ public class PlayerController : MonoBehaviour
         {
             if (nearbyTree.GetComponent<PlantController>().Regrow())
             {
-                if(health < 3)
+                if(currentHealth < maxHealth)
                 {
-                    health += 1;
-                    userInterface.UpdateHealth(health);
+                    currentHealth += 1;
+                    userInterface.UpdateHealth(currentHealth);
                 } 
                 energy -= 10f;
                 userInterface.UpdateEnergy(energy);
@@ -163,7 +184,7 @@ public class PlayerController : MonoBehaviour
 
     void PlayerDeath()
     {
-        userInterface.MiddleTextMessage("Game Over");
+        userInterface.MiddleTextMessage("Game Over", Color.red);
         playerAlive = false;
         rb.constraints = RigidbodyConstraints.None;
         StartCoroutine(DeathTimer());
@@ -180,9 +201,9 @@ public class PlayerController : MonoBehaviour
         if (!immune)
         {
             Debug.Log("Hit Taken");
-            health -= damage;
-            userInterface.UpdateHealth(health);
-            if (health <= 0)
+            currentHealth -= damage;
+            userInterface.UpdateHealth(currentHealth);
+            if (currentHealth <= 0)
             {
                 PlayerDeath();
             }
@@ -201,19 +222,29 @@ public class PlayerController : MonoBehaviour
         lifeGems += amount;
         userInterface.UpdateGems(lifeGems);
         //Level 1
-        if (lifeGems >= 30)
+        if (lifeGems >= 30 && level == 0)
         {
-            moveSpeed = 7f;
+            level = 1;
+            userInterface.MiddleTextMessage("Level Up! Move speed increased", Color.green);
+            moveSpeed = 8f;
+            currentHealth = maxHealth;
         }
         //Level 2
-        if(lifeGems >= 60)
+        if(lifeGems >= 60 && level == 1)
         {
-            moveSpeed = 8f;
+            level = 2;
+            userInterface.MiddleTextMessage("Level Up! Health Increased", Color.green);
+            maxHealth += 1;
+            currentHealth = maxHealth;
+            userInterface.ExtraLife();
         }
         //Level 3
-        if(lifeGems >= 90)
+        if(lifeGems >= 90 && level == 2)
         {
+            level = 3;
+            userInterface.MiddleTextMessage("Level Up! Move speed increased", Color.green);
             moveSpeed = 10f;
+            currentHealth = maxHealth;
         }
     }
 
