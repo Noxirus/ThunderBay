@@ -82,9 +82,11 @@ public class UserInterface : MonoBehaviour
         }
     }
 
-    public void SetMaxEnergy(float maxEnergy) {
+    public void SetMaxEnergy(float maxEnergy)
+    {
         energySlider.maxValue = maxEnergy;
         energySlider.value = maxEnergy;
+    }
     public void ExtraLife()
     {
         extraHeart.SetActive(true);
